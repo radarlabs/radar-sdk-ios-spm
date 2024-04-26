@@ -1,0 +1,37 @@
+name: Repository Dispatch
+on:
+  repository_dispatch:
+    types: [update-xcframework]
+jobs:
+  update-iOS-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Modify Package.swift
+        run: |
+          echo "Modifying Package.swift..."
+          sed -i 's#url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/.*/RadarSDK.xcframework.zip"#url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/${{ github.event.client_payload.release }}/RadarSDK.xcframework.zip"#g' Package.swift
+          sed -i 's#checksum: ".*"#checksum: "${{ github.event.client_payload.checksum }}"#g' Package.swift
+      # open a pull request with the new sdk version
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v6
+        with:
+          title: Automated radar-sdk-ios version bump to ${{ github.event.client_payload.release }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Enable Pull Request Automerge
+        if: ${{ steps.cpr.outputs.pull-request-number }}
+        run: gh pr merge --merge --auto ${{ steps.cpr.outputs.pull-request-number }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.event.client_payload.release }}
+          release_name: Release ${{ github.event.client_payload.release }}
+          body: |
+            Release notes: 
+            ${{ github.event.client_payload.url }}

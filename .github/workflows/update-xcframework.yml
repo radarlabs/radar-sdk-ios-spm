@@ -6,7 +6,7 @@ jobs:
   myEvent:
     runs-on: ubuntu-latest
     steps:
-       - name: Modify Package.swift
+      - name: Modify Package.swift
         run: |
           echo "Modifying Package.swift..."
           sed -i 's#url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/.*/RadarSDK.xcframework.zip"#url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/${{ github.event.client_payload.release }}/RadarSDK.xcframework.zip"#g' Package.swift

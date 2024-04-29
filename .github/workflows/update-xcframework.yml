@@ -3,7 +3,7 @@ on:
   repository_dispatch:
     types: [update-xcframework]
 jobs:
-  myEvent:
+  update-iOS-version:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

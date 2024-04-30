@@ -32,6 +32,6 @@ jobs:
         with:
           tag_name: ${{ github.event.client_payload.release }}
           release_name: Release ${{ github.event.client_payload.release }}
-        body: |
-          Release notes: 
-          ${{ github.event.client_payload.url }}
+          body: |
+            Release notes: 
+            ${{ github.event.client_payload.url }}

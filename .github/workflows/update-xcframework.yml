@@ -3,9 +3,9 @@ on:
   repository_dispatch:
     types: [update-xcframework]
 jobs:
-  # we only run this job if it is triggered by the certain PAT
-  if: github.actor == 'KennyHuRadar'
   update-iOS-version:
+    # we only run this job if it is triggered by the certain PAT
+    if: github.actor == 'KennyHuRadar'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

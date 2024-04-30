@@ -15,7 +15,23 @@ jobs:
           sed -i 's#checksum: ".*"#checksum: "${{ github.event.client_payload.checksum }}"#g' Package.swift
       # open a pull request with the new sdk version
       - name: Create Pull Request
+        id: cpr
         uses: peter-evans/create-pull-request@v6
         with:
           title: Automated radar-sdk-ios version bump to ${{ github.event.client_payload.release }}
           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Enable Pull Request Automerge
+        if: ${{ steps.cpr.outputs.pull-request-number }}
+        run: gh pr merge --merge --auto ${{ steps.cpr.outputs.pull-request-number }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Release
+        uses: actions/create-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.event.client_payload.release }}
+          release_name: Release ${{ github.event.client_payload.release }}
+        body: |
+          Release notes: 
+          ${{ github.event.client_payload.url }}

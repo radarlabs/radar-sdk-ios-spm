@@ -42,6 +42,6 @@ jobs:
           tag_name: ${{ github.event.client_payload.release }}
           release_name: ${{ github.event.client_payload.release }}
           body: |
-            ${{ fromJSON(github.event.client_payload.body) }}
+            ${{ github.event.client_payload.body }}
             
             Original release: ${{ github.event.client_payload.url }}

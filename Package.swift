@@ -12,8 +12,8 @@ let package = Package(
     .target(name: "_RadarStub"),
     .binaryTarget(
         name: "RadarSDK",
-        url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/3.11.2/RadarSDK.xcframework.zip",
-        checksum: "9e43a95e0c58aec4be98b0209a31f190683917aa943a114a418b0b960a3c0e83"
+        url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/3.12.0/RadarSDK.xcframework.zip",
+        checksum: "c3d700abb9cf6a54b173e4af84ff29b7aaf211da43d9ec4c56c17ee38760897b"
     ),
   ]
 )

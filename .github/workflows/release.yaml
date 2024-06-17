@@ -1,0 +1,45 @@
+name: Radar SDK iOS Release
+
+on:
+  push
+
+jobs:
+  release-SDK:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Modify Package.swift
+        run: echo "lkajdf" > test.txt
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v6
+        with:
+          title: Test Workflow 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+      # auto approve the pull request on behalf of code owner for automerge
+      - name: Auto Approve Pull Request
+        if: ${{ steps.cpr.outputs.pull-request-number }}
+        uses: hmarr/auto-approve-action@v4
+        with:
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          github-token: ${{ secrets.AUTO_APPROVE_TOKEN }}
+      # - name: Enable Pull Request Automerge
+      #   if: ${{ steps.cpr.outputs.pull-request-number }}
+      #   run: gh pr merge --merge --auto ${{ steps.cpr.outputs.pull-request-number }}
+      #   env:
+      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Wait for PR to be merged
+        run: while [ $(gh pr view ${{ steps.cpr.outputs.pull-request-number }} --json state | jq -r .state) != "MERGED" ]; do sleep 5; done
+        timeout-minutes: 1
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: 3.13.3-beta.2
+          release_name: 3.13.3-beta.2
+          body: |
+            Original release: https://github.com/radarlabs/radar-sdk-ios/releases/tag/3.13.3-beta.1

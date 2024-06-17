@@ -30,3 +30,5 @@ jobs:
       - name: Wait for PR to be merged
         run: while [ $(gh pr view ${{ steps.cpr.outputs.pull-request-number }} --json state | jq -r .state) != "MERGED" ]; do sleep 5; done
         timeout-minutes: 5
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

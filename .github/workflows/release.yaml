@@ -1,0 +1,18 @@
+name: Radar SDK iOS Release
+
+on:
+  pull_request:
+    types:
+      - closed
+
+env:
+  release_version: ${{ ${github.event.pull_request.title##* } }}
+
+jobs:
+  release-SDK:
+    # we only run this job if it is triggered by the certain PAT
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo Release Version
+        run: echo ${{ release_version }}

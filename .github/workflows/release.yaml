@@ -5,9 +5,6 @@ on:
     types:
       - closed
 
-env:
-  release_version: ${{ ${github.event.pull_request.title##* } }}
-
 jobs:
   release-SDK:
     # we only run this job if it is triggered by the certain PAT
@@ -15,4 +12,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Echo Release Version
-        run: echo ${{ release_version }}
+        run: echo ${{ ${github.event.pull_request.title##* } }}

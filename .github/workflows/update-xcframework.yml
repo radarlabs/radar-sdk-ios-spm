@@ -10,12 +10,19 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      - name: Create new branch
+        run: git checkout -b create-pull-request/patch
       - name: Modify Package.swift
         run: |
           echo "Modifying Package.swift..."
           sed -i 's#url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/.*/RadarSDK.xcframework.zip"#url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/${{ github.event.client_payload.release }}/RadarSDK.xcframework.zip"#g' Package.swift
           sed -i 's#checksum: ".*"#checksum: "${{ github.event.client_payload.checksum }}"#g' Package.swift
       # open a pull request with the new sdk version
+      - name: Commit and push changes
+        uses: devops-infra/action-commit-push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          commit_message: radar-sdk-ios version bump to ${{ github.event.client_payload.release }}
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v6

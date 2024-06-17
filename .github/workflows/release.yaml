@@ -3,6 +3,9 @@ name: Radar SDK iOS Release
 on:
   push
 
+env:
+  RELEASE_VERSION: 3.13.3-beta.3
+
 jobs:
   release-SDK:
     runs-on: ubuntu-latest
@@ -13,8 +16,11 @@ jobs:
         run: git checkout -b create-pull-request/patch
       - name: Modify Package.swift
         run: echo "lkajdf" > test.txt
-      - name: Commit changes
-        run: git add test.txt; git commit -m 'radar-sdk-ios version bump to ${{ github.event.client_payload.release }}'; git push --force
+      - name: Commit and push changes
+        uses: devops-infra/action-commit-push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          commit_message: radar-sdk-ios version bump to ${{ github.event.client_payload.release }}
       - name:
         run: gh pr create -B main -H create-pull-request/patch --title 'Automated radar-sdk-ios version bump to ${{ github.event.client_payload.release }}'
         env:
@@ -36,8 +42,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: 3.13.3-beta.2
-          release_name: 3.13.3-beta.2
+          tag_name: ${{ RELEASE_VERSION }}
+          release_name: ${{ RELEASE_VERSION }}
           prerelease: true
           body: |
             Original release: https://github.com/radarlabs/radar-sdk-ios/releases/tag/3.13.3-beta.1

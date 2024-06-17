@@ -17,7 +17,7 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v6
         with:
-          title: Automated radar-sdk-ios version bump to ${{ github.event.client_payload.release }}
+          title: Automated radar-sdk-ios version bump to 3.13.3-beta.4
           token: ${{ secrets.GITHUB_TOKEN }}
       # auto approve the pull request on behalf of code owner for automerge
       - name: Auto Approve Pull Request
@@ -36,8 +36,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.event.client_payload.release }}
-          release_name: ${{ github.event.client_payload.release }}
+          tag_name: 3.13.3-beta.4
+          release_name: 3.13.3-beta.4
           commitish: ${{ steps.cpr.outputs.pull-request-head-sha }}
           prerelease: true
           body: |

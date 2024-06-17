@@ -1,10 +1,9 @@
 name: Radar SDK iOS Release
 
 on:
-  push
-
-env:
-  RELEASE_VERSION: 3.13.3-beta.3
+  push:
+    branch:
+      main
 
 jobs:
   release-SDK:
@@ -12,19 +11,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Create new branch
-        run: git checkout -b create-pull-request/patch
       - name: Modify Package.swift
         run: echo "lkajdf" > test.txt
-      - name: Commit and push changes
-        uses: devops-infra/action-commit-push@master
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v6
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          commit_message: radar-sdk-ios version bump to $RELEASE_VERSION
-      - name:
-        run: gh pr create -B main -H create-pull-request/patch --title 'Automated radar-sdk-ios version bump to $RELEASE_VERSION' --body 'Automated radar-sdk-ios version bump'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          title: Automated radar-sdk-ios version bump to ${{ github.event.client_payload.release }}
+          token: ${{ secrets.GITHUB_TOKEN }}
       # auto approve the pull request on behalf of code owner for automerge
       - name: Auto Approve Pull Request
         if: ${{ steps.cpr.outputs.pull-request-number }}
@@ -34,7 +28,7 @@ jobs:
           github-token: ${{ secrets.AUTO_APPROVE_TOKEN }}
       # - name: Enable Pull Request Automerge
       #   if: ${{ steps.cpr.outputs.pull-request-number }}
-      #   run: gh pr merge --merge --auto --delete-branch ${{ steps.cpr.outputs.pull-request-number }}
+      #   run: gh pr merge --merge --auto ${{ steps.cpr.outputs.pull-request-number }}
       #   env:
       #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Release
@@ -42,8 +36,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: $RELEASE_VERSION
-          release_name: $RELEASE_VERSION
+          tag_name: ${{ github.event.client_payload.release }}
+          release_name: ${{ github.event.client_payload.release }}
+          commitish: ${{ steps.cpr.outputs.pull-request-head-sha }}
           prerelease: true
           body: |
-            Original release: https://github.com/radarlabs/radar-sdk-ios/releases/tag/3.13.3-beta.1
+            ${{ github.event.client_payload.body }}
+            
+            Original release: ${{ github.event.client_payload.url }}

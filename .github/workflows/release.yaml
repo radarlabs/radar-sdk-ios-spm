@@ -22,7 +22,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           commit_message: radar-sdk-ios version bump to $RELEASE_VERSION
       - name:
-        run: gh pr create -B main -H create-pull-request/patch --title 'Automated radar-sdk-ios version bump to $RELEASE_VERSION'
+        run: gh pr create -B main -H create-pull-request/patch --title 'Automated radar-sdk-ios version bump to $RELEASE_VERSION' --body 'Automated radar-sdk-ios version bump'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # auto approve the pull request on behalf of code owner for automerge

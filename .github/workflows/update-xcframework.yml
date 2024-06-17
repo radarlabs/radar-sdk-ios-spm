@@ -2,10 +2,11 @@ name: Repository Dispatch
 on:
   repository_dispatch:
     types: [update-xcframework]
+  push
 jobs:
   update-iOS-version:
     # we only run this job if it is triggered by the certain PAT
-    if: github.actor == 'KennyHuRadar'
+    # if: github.actor == 'KennyHuRadar'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -31,7 +32,7 @@ jobs:
           github-token: ${{ secrets.AUTO_APPROVE_TOKEN }}
       - name: Enable Pull Request Automerge
         if: ${{ steps.cpr.outputs.pull-request-number }}
-        run: gh pr merge --merge --auto ${{ steps.cpr.outputs.pull-request-number }}
+        run: gh pr merge --merge --auto ${{ steps.cpr.outputs.pull-request-number }}; echo ${{ steps.cpr.outputs.pull-request-head-sha }};
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Release
@@ -39,9 +40,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.event.client_payload.release }}
-          release_name: ${{ github.event.client_payload.release }}
+          tag_name: 3.13.3-beta.2${{ github.event.client_payload.release }}
+          release_name: 3.13.3-beta.2${{ github.event.client_payload.release }}
           commitish: ${{ steps.cpr.outputs.pull-request-head-sha }}
+          prerelease: true
           body: |
             ${{ github.event.client_payload.body }}
             

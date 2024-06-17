@@ -20,9 +20,9 @@ jobs:
         uses: devops-infra/action-commit-push@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          commit_message: radar-sdk-ios version bump to ${{ github.event.client_payload.release }}
+          commit_message: radar-sdk-ios version bump to $RELEASE_VERSION
       - name:
-        run: gh pr create -B main -H create-pull-request/patch --title 'Automated radar-sdk-ios version bump to ${{ github.event.client_payload.release }}'
+        run: gh pr create -B main -H create-pull-request/patch --title 'Automated radar-sdk-ios version bump to $RELEASE_VERSION'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # auto approve the pull request on behalf of code owner for automerge
@@ -42,8 +42,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ RELEASE_VERSION }}
-          release_name: ${{ RELEASE_VERSION }}
+          tag_name: $RELEASE_VERSION
+          release_name: $RELEASE_VERSION
           prerelease: true
           body: |
             Original release: https://github.com/radarlabs/radar-sdk-ios/releases/tag/3.13.3-beta.1

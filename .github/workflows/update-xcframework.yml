@@ -41,6 +41,7 @@ jobs:
         with:
           tag_name: ${{ github.event.client_payload.release }}
           release_name: ${{ github.event.client_payload.release }}
+          commitish: ${{ steps.cpr.outputs.pull-request-head-sha }}
           body: |
             ${{ github.event.client_payload.body }}
             

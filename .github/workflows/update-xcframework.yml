@@ -1,8 +1,7 @@
 name: Repository Dispatch
 on:
-  repository_dispatch:
-    types: [update-xcframework]
   push
+
 jobs:
   update-iOS-version:
     # we only run this job if it is triggered by the certain PAT

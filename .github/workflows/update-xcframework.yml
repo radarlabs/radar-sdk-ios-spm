@@ -34,3 +34,17 @@ jobs:
         run: gh pr merge --merge --auto ${{ steps.cpr.outputs.pull-request-number }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Wait for PR to be merged
+        run: while [ $(gh pr view ${{ steps.cpr.outputs.pull-request-number }} --json state | jq -r .state) != "MERGED" ]; do sleep 1; done
+        timeout-minutes: 1
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.event.client_payload.release }}
+          release_name: ${{ github.event.client_payload.release }}
+          body: |
+            ${{ github.event.client_payload.body }}
+            
+            Original release: ${{ github.event.client_payload.url }}

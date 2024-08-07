@@ -15,6 +15,7 @@ jobs:
           echo "Modifying Package.swift..."
           sed -i 's#url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/.*/RadarSDK.xcframework.zip"#url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/${{ github.event.client_payload.release }}/RadarSDK.xcframework.zip"#g' Package.swift
           sed -i 's#checksum: ".*"#checksum: "${{ github.event.client_payload.checksum }}"#g' Package.swift
+          
       # open a pull request with the new sdk version
       - name: Create Pull Request
         id: cpr

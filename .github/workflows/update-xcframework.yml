@@ -14,12 +14,9 @@ jobs:
         run: |
           echo "Modifying Package.swift..."
           sed -i 's#url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/.*/RadarSDK.xcframework.zip"#url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/${{ github.event.client_payload.release }}/RadarSDK.xcframework.zip"#g' Package.swift
-          sed -i 's#checksum: ".*"#checksum: "${{ github.event.client_payload.checksum }}"#g' Package.swift
-
-          sed -i '' 's#url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/.*/RadarSDK.xcframework.zip"#url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/${{ github.event.client_payload.release }}/RadarSDK.xcframework.zip"#g' Package.swift
-          sed -i '' 's#url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/.*/RadarSDKMotion.xcframework.zip"#url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/${{ github.event.client_payload.release }}/RadarSDKMotion.xcframework.zip"#g' Package.swift
-          sed -i '' 's#checksum: ".*" // RadarSDK checksum#checksum: "${{ github.event.client_payload.checksum }}" // RadarSDK checksum#g' Package.swift
-          sed -i '' 's#checksum: ".*" // RadarSDKMotion checksum#checksum: "${{ github.event.client_payload.checksum_motion }}" // RadarSDKMotion checksum#g' Package.swift
+          sed -i 's#url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/.*/RadarSDKMotion.xcframework.zip"#url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/${{ github.event.client_payload.release }}/RadarSDKMotion.xcframework.zip"#g' Package.swift
+          sed -i 's#checksum: ".*" // RadarSDK checksum#checksum: "${{ github.event.client_payload.checksum }}" // RadarSDK checksum#g' Package.swift
+          sed -i 's#checksum: ".*" // RadarSDKMotion checksum#checksum: "${{ github.event.client_payload.checksum_motion }}" // RadarSDKMotion checksum#g' Package.swift
 
       # open a pull request with the new sdk version
       - name: Create Pull Request

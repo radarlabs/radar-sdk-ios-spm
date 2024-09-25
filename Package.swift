@@ -15,13 +15,13 @@ let package = Package(
         .target(name: "_RadarStub"),
         .binaryTarget(
             name: "RadarSDK",
-            url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/3.18.0/RadarSDK.xcframework.zip",
-            checksum: "067a224c0372f3b6326648e3e5bcf2baf6f0e4f64ff30d0007a44ca884c2b849" // RadarSDK checksum
+            url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/3.18.1/RadarSDK.xcframework.zip",
+            checksum: "84b107e7bf77389d16c84a9cf9d48e6d983baaab1e9e4a5c3096f63229cc2684" // RadarSDK checksum
         ),
         .binaryTarget(
             name: "RadarSDKMotion",
-            url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/3.18.0/RadarSDKMotion.xcframework.zip",
-            checksum: "54912ce586c831211332409d0c6f4a02fc5ef3296f9268b9edd313dff1122d47" // RadarSDKMotion checksum
+            url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/3.18.1/RadarSDKMotion.xcframework.zip",
+            checksum: "57f227a2dd6fa8346a4c3a46a30de1e7ebf2fe798d095f0996b42a84a356312e" // RadarSDKMotion checksum
         )
     ]
 )

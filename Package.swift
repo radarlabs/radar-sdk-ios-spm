@@ -9,7 +9,8 @@ let package = Package(
     ],
     products: [
           .library(name: "RadarSDK", targets: ["RadarSDK", "_RadarStub"]),
-          .library(name: "RadarSDKMotion", targets: ["RadarSDKMotion", "_RadarStub"])
+          .library(name: "RadarSDKMotion", targets: ["RadarSDKMotion", "_RadarStub"]),
+          .library(name: "RadarSDKLocationPermissions", targets: ["RadarSDKLocationPermissions", "_RadarStub"])
       ],
       targets: [
         .target(name: "_RadarStub"),
@@ -22,6 +23,11 @@ let package = Package(
             name: "RadarSDKMotion",
             url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/3.18.1/RadarSDKMotion.xcframework.zip",
             checksum: "57f227a2dd6fa8346a4c3a46a30de1e7ebf2fe798d095f0996b42a84a356312e" // RadarSDKMotion checksum
+        ),
+        .binaryTarget(
+            name: "RadarSDKLocationPermissions",
+            url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/3.18.1/RadarSDKLocationPermissions.xcframework.zip",
+            checksum: "b8f8c3f3b7f9f7c7b3c8b5c6f1c1e5f5e3e2d1c0b9a8a7a6a5a4a3a2a1a09080706050403020100" // RadarSDKLocationPermissions checksum
         )
     ]
 )

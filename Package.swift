@@ -16,17 +16,17 @@ let package = Package(
         .target(name: "_RadarStub"),
         .binaryTarget(
             name: "RadarSDK",
-            url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/3.18.3/RadarSDK.xcframework.zip",
-            checksum: "8435a4fbe740606019f0f1587fd8da30878afb94e5d0b71c43f127307e14a21e" // RadarSDK checksum
+            url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/3.18.2/RadarSDK.xcframework.zip",
+            checksum: "5624841e1999c96429bf822a7878be1a65f2acb2f0b1fa83bd64d0e2ecbb6ab1" // RadarSDK checksum
         ),
         .binaryTarget(
             name: "RadarSDKMotion",
-            url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/3.18.3/RadarSDKMotion.xcframework.zip",
-            checksum: "0f3d3e99438b6e4bdd17f98dbb7b7bada3c2001900eb6bb17f5a37f561943143" // RadarSDKMotion checksum
+            url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/3.18.2/RadarSDKMotion.xcframework.zip",
+            checksum: "d3c6ce12f78178be0d0ba7c654dafe07becb9bcff10597271fbc6e8c13980596" // RadarSDKMotion checksum
         ),
         .binaryTarget(
             name: "RadarSDKLocationPermission",
-            url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/3.18.3/RadarSDKLocationPermission.xcframework.zip",
+            url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/3.18.2/RadarSDKLocationPermission.xcframework.zip",
             checksum: "" // RadarSDKLocationPermission checksum
         )
     ]

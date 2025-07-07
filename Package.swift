@@ -27,7 +27,7 @@ let package = Package(
         .binaryTarget(
             name: "RadarSDKIndoors",
             url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/3.22.0-beta.3/RadarSDKIndoors.xcframework.zip",
-            checksum: "<CHECKSUM_INDOORS>" // placeholder
+            checksum: "<CHECKSUM_INDOORS>" // RadarSDKIndoors checksum
         ),
     ]
 )

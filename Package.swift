@@ -16,18 +16,18 @@ let package = Package(
         .target(name: "_RadarStub"),
         .binaryTarget(
             name: "RadarSDK",
-            url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/3.22.0-beta.5/RadarSDK.xcframework.zip",
-            checksum: "131048cb507101169c87a282c195db4ab9207b64173bdf21966bb0cc9830d29a" // RadarSDK checksum
+            url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/3.21.9/RadarSDK.xcframework.zip",
+            checksum: "e6ccaafcf80a9449d8eb784e17689b27d40d1011213aea191838f103c5b2b630" // RadarSDK checksum
         ),
         .binaryTarget(
             name: "RadarSDKMotion",
-            url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/3.22.0-beta.5/RadarSDKMotion.xcframework.zip",
-            checksum: "57dd8961beb1afb4ead102713bd1d32bf4480da313426afe75680991b6cf27f4" // RadarSDKMotion checksum
+            url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/3.21.9/RadarSDKMotion.xcframework.zip",
+            checksum: "d59c608f52cd65b3806921da4b05710e636d1c088dc9fd29203c2b3ddce288d5" // RadarSDKMotion checksum
         ),
         .binaryTarget(
             name: "RadarSDKIndoors",
-            url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/3.22.0-beta.5/RadarSDKIndoors.xcframework.zip",
-            checksum: "c9124b50d65e1ab084cb546f6908844ba39178f747e5e1c3c16d0c31a8a48c35" // RadarSDKIndoors checksum
+            url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/3.21.9/RadarSDKIndoors.xcframework.zip",
+            checksum: "" // RadarSDKIndoors checksum
         ),
     ]
 )

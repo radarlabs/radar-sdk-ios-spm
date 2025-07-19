@@ -10,7 +10,6 @@ let package = Package(
     products: [
           .library(name: "RadarSDK", targets: ["RadarSDK", "_RadarStub"]),
           .library(name: "RadarSDKMotion", targets: ["RadarSDKMotion", "_RadarStub"]),
-          .library(name: "RadarSDKIndoors", targets: ["RadarSDKIndoors", "_RadarStub"]),
       ],
       targets: [
         .target(name: "_RadarStub"),
@@ -23,11 +22,6 @@ let package = Package(
             name: "RadarSDKMotion",
             url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/3.21.11/RadarSDKMotion.xcframework.zip",
             checksum: "5b646a160179ebe35e716728833d5302e745bf9e5cfb1ac645e508c43a69416e" // RadarSDKMotion checksum
-        ),
-        .binaryTarget(
-            name: "RadarSDKIndoors",
-            url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/3.21.11/RadarSDKIndoors.xcframework.zip",
-            checksum: "" // RadarSDKIndoors checksum
-        ),
+        )
     ]
 )

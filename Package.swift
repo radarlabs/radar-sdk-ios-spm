@@ -11,6 +11,7 @@ let package = Package(
           .library(name: "RadarSDK", targets: ["RadarSDK", "_RadarStub"]),
           .library(name: "RadarSDKMotion", targets: ["RadarSDKMotion", "_RadarStub"]),
           .library(name: "RadarSDKIndoors", targets: ["RadarSDKIndoors", "_RadarStub"]),
+          .library(name: "RadarSDKFraud", targets: ["RadarSDKFraud", "_RadarStub"]),
       ],
       targets: [
         .target(name: "_RadarStub"),
@@ -29,6 +30,11 @@ let package = Package(
             name: "RadarSDKIndoors",
             url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/3.25.1/RadarSDKIndoors.xcframework.zip",
             checksum: "03073cdabdee9b8bd4ae5d29f8771e568664eb21b279c654af4e3cb4c163ad31" // RadarSDKIndoors checksum
+        ),
+        .binaryTarget(
+            name: "RadarSDKFraud",
+            url: "https://github.com/radarlabs/radar-sdk-ios/releases/download/3.25.1/RadarSDKFraud.xcframework.zip",
+            checksum: "0000000000000000000000000000000000000000000000000000000000000000" // RadarSDKFraud checksum
         )
     ]
 )

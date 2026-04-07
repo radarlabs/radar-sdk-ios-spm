@@ -25,18 +25,6 @@ jobs:
         with:
           title: Automated radar-sdk-ios version bump to ${{ github.event.client_payload.release }}
           token: ${{ secrets.GITHUB_TOKEN }}
-      # auto approve the pull request on behalf of code owner for automerge
-      - name: Auto Approve Pull Request
-        if: ${{ steps.cpr.outputs.pull-request-number }}
-        uses: hmarr/auto-approve-action@v4
-        with:
-          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
-          github-token: ${{ secrets.AUTO_APPROVE_TOKEN }}
-      - name: Enable Pull Request Automerge
-        if: ${{ steps.cpr.outputs.pull-request-number }}
-        run: gh pr merge --squash --auto ${{ steps.cpr.outputs.pull-request-number }}
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Release
         uses: actions/create-release@v1
         env:
@@ -45,6 +33,7 @@ jobs:
           tag_name: ${{ github.event.client_payload.release }}
           release_name: ${{ github.event.client_payload.release }}
           commitish: ${{ steps.cpr.outputs.pull-request-head-sha }}
+          draft: true
           body: |
             ${{ github.event.client_payload.body }}
             

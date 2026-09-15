@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "RadarSDK",
     platforms: [
-        .iOS(.v10)
+        .iOS(.v15)
     ],
     products: [
           .library(name: "RadarSDK", targets: ["RadarSDK", "_RadarStub"]),
